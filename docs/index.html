@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Stock Screener</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <h1>AI Stock Screener</h1>
+      <p class="tagline">Live fundamentals, technicals, and AI-powered projections.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card search-card">
+      <form id="search-form">
+        <label for="ticker-input">Ticker Symbol</label>
+        <div class="input-group">
+          <input id="ticker-input" name="ticker" type="text" maxlength="10" placeholder="AAPL, MSFT, TSLA" required />
+          <button type="submit">Search</button>
+        </div>
+        <small>Enter a valid stock ticker (letters/numbers only). Data powered by Yahoo Finance via yfinance.</small>
+      </form>
+      <div id="status-message"></div>
+    </section>
+
+    <section class="grid">
+      <article class="card" id="overview-card">
+        <div class="card-header">
+          <h2>Overview</h2>
+        </div>
+        <div class="overview-body">
+          <div>
+            <p class="company-name" id="company-name">—</p>
+            <p class="ticker" id="ticker">—</p>
+            <p class="meta" id="meta">Exchange · Sector · Industry</p>
+          </div>
+          <div class="price-block">
+            <p class="price" id="price">—</p>
+            <p class="change" id="change">—</p>
+          </div>
+        </div>
+        <div class="overview-details">
+          <p><strong>Country:</strong> <span id="country">—</span></p>
+          <p><strong>Currency:</strong> <span id="currency">—</span></p>
+          <p><strong>Beta:</strong> <span id="beta">—</span></p>
+          <p><strong>Volatility (annualized):</strong> <span id="volatility">—</span></p>
+        </div>
+      </article>
+
+      <article class="card description-card">
+        <div class="card-header">
+          <h2>Company Description</h2>
+        </div>
+        <div class="description-content" id="description">
+          Enter a ticker to see a detailed business summary.
+        </div>
+      </article>
+
+      <article class="card ratios-card">
+        <div class="card-header">
+          <h2>Key Ratios & Fundamentals</h2>
+          <small>P/E = price/earnings (growth expectations), PEG adjusts for growth, margins show profitability.</small>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <tbody id="ratios-table"></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="card chart-card">
+        <div class="card-header">
+          <h2>Price Chart</h2>
+          <div class="dropdown">
+            <label for="period-select">Period</label>
+            <select id="period-select">
+              <option value="1mo|1d">1M</option>
+              <option value="3mo|1d">3M</option>
+              <option value="6mo|1d">6M</option>
+              <option value="1y|1d" selected>1Y</option>
+              <option value="5y|1wk">5Y</option>
+            </select>
+          </div>
+        </div>
+        <canvas id="price-chart" aria-label="Historical price chart" role="img"></canvas>
+      </article>
+
+      <article class="card technical-card">
+        <div class="card-header">
+          <h2>Technical Indicators</h2>
+        </div>
+        <div id="technicals">
+          <p>Moving averages, RSI (momentum between 0-100), MACD (trend strength), EMA (reacts faster).</p>
+          <div class="tech-grid" id="technical-grid"></div>
+        </div>
+      </article>
+
+      <article class="card prediction-card">
+        <div class="card-header">
+          <h2>Future Predicted Value</h2>
+        </div>
+        <div id="prediction">
+          <p>Use the search above to see AI-enhanced price projections.</p>
+        </div>
+        <p class="disclaimer" id="prediction-disclaimer"></p>
+      </article>
+
+      <article class="card summary-card">
+        <div class="card-header">
+          <h2>Risk & Summary</h2>
+        </div>
+        <p id="risk-summary">Overview of volatility, valuation, and trend will appear here.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Built for educational purposes. Quotes delayed. Not investment advice.</p>
+  </footer>
+</body>
+
+</html>
